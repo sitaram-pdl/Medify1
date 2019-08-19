@@ -22,6 +22,14 @@ import { createStackNavigator, createSwitchNavigator, createAppContainer } from 
 
 export default class SignInScreen extends React.Component {
 
+  state = {
+    user: '',
+    username: '',
+    password: '',
+    isLoggingIn: false,
+    message: '',
+  };
+
   static navigationOptions = {
     header: null,
     title: 'Welcome',
@@ -56,6 +64,7 @@ export default class SignInScreen extends React.Component {
               ref="userid"
               onSubmitEditing={() => this.refs.password.focus()}
 
+              onChangeText={(username) => this.setState({ username })}
             />
             <TextInput style={styles.inputBox}
               underlineColorAndroid='rgba(0,0,0,0)'
@@ -63,12 +72,17 @@ export default class SignInScreen extends React.Component {
               secureTextEntry={true}
               placeholderTextColor="#ffffff"
               ref="password"
-
+              onChangeText={(password) => this.setState({ password })}
             />
-            <TouchableOpacity style={styles.button} onPress={this._signInAsync} >
+            <TouchableOpacity style={styles.button} onPress={this._validate} >
               <Text style={styles.buttonText} >Login</Text>
             </TouchableOpacity>
           </View>
+          {!!this.state.message && (
+            <Text style={styles.message} >
+              {this.state.message}
+            </Text>
+          )}
 
           <View style={styles.signupTextCont}>
             <Text style={styles.signupText}>Don't have an account yet?</Text>
@@ -81,10 +95,27 @@ export default class SignInScreen extends React.Component {
     )
   }
 
-  _signInAsync = () => {
+  _validate = () => {
+    if (this.state.username == "") { this.setState({ message: "Oops! Registration No. field cannot be empty :(" }) }
+    else if (this.state.password == "") { this.setState({ message: "Oops! Password field cannot be empty :(" }) }
+    else if (this.state.username == "Sitaram" && this.state.password == "password") {
 
-    this.props.navigation.navigate('App');
+      AsyncStorage.setItem('UserToken', 'sdfadd');
+      AsyncStorage.setItem('UserId', 'asdf');
+      AsyncStorage.setItem('UserType', 'Driver');
+
+
+      this.props.navigation.navigate('App');
+    }
+    else this._userLogin()
   };
+
+
+  _userLogin() {
+    { this.setState({ message: "thik se dal bey madarchut" }) }
+
+    //hya gara haii sahil
+  }
   _signOutAsync = () => {
 
     this.props.navigation.navigate('SignUp');
