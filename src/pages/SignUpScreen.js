@@ -2,6 +2,7 @@ import React from 'react';
 import {
     ActivityIndicator,
     AsyncStorage,
+    Alert,
 
     StatusBar,
     StyleSheet,
@@ -21,6 +22,18 @@ export default class SignUpScreen extends React.Component {
     constructor(props) {
         super(props);
     }
+
+    state = {
+        firstname: '',
+        lastname: '',
+        userid: '',
+        birthYear: '',
+        birthMonth: '',
+        birthDay: '',
+        password: '',
+        repassword: '',
+        message: '',
+    };
 
     static navigationOptions = {
         title: 'Please sign up',
@@ -43,6 +56,7 @@ export default class SignUpScreen extends React.Component {
                                 placeholder="Firstname"
                                 placeholderTextColor="#ffffff"
                                 ref="firstname"
+                                onChangeText={(firstname) => this.setState({ firstname })}
                                 onSubmitEditing={() => this.refs.lastname.focus()}
 
 
@@ -53,6 +67,7 @@ export default class SignUpScreen extends React.Component {
                                 placeholder="Lastname"
                                 placeholderTextColor="#ffffff"
                                 ref="lastname"
+                                onChangeText={(lastname) => this.setState({ lastname })}
                                 onSubmitEditing={() => this.refs.userid.focus()}
 
                             />
@@ -60,28 +75,59 @@ export default class SignUpScreen extends React.Component {
 
                         <TextInput style={styles.inputBox}
                             underlineColorAndroid='rgba(0,0,0,0)'
-                            placeholder="Email / User Id"
+                            placeholder=" User Id"
                             placeholderTextColor="#ffffff"
-                            ref="userid"
-                            onSubmitEditing={() => this.refs.email.focus()}
-
-                        />
-                        <TextInput style={styles.inputBox}
-                            underlineColorAndroid='rgba(0,0,0,0)'
-                            placeholder="Email"
-                            placeholderTextColor="#ffffff"
-                            selectionColor="#fff"
                             keyboardType="email-address"
-                            ref="email"
-                            onSubmitEditing={() => this.refs.password.focus()}
+                            ref="userid"
+                            onChangeText={(userid) => this.setState({ userid })}
+                            onSubmitEditing={() => this.refs.yyyy.focus()}
 
                         />
+
+                        <View style={styles.firstAndLastName}>
+                            <Text style={styles.signupButton}>D.O.B</Text>
+                            <TextInput style={styles.inputYYYY}
+                                underlineColorAndroid='rgba(0,0,0,0)'
+                                placeholder="YYYY"
+                                placeholderTextColor="#ffffff"
+                                keyboardType="numeric"
+                                ref="yyyy"
+                                maxLength={4}
+                                onChangeText={(birthYear) => this.setState({ birthYear })}
+                                onSubmitEditing={() => this.refs.mm.focus()}
+                            />
+                            <TextInput style={styles.inputMM}
+                                underlineColorAndroid='rgba(0,0,0,0)'
+                                placeholder="MM"
+                                keyboardType="numeric"
+                                placeholderTextColor="#ffffff"
+                                ref="mm"
+                                onChangeText={(birthMonth) => this.setState({ birthMonth })}
+                                onSubmitEditing={() => this.refs.dd.focus()}
+                                maxLength={2}
+                            />
+
+
+
+                            <TextInput style={styles.inputMM}
+                                underlineColorAndroid='rgba(0,0,0,0)'
+                                placeholder="DD"
+                                keyboardType="numeric"
+                                placeholderTextColor="#ffffff"
+                                ref="dd"
+                                maxLength={2}
+                                onChangeText={(birthDay) => this.setState({ birthDay })}
+                                onSubmitEditing={() => this.refs.password.focus()}
+
+                            />
+                        </View>
                         <TextInput style={styles.inputBox}
                             underlineColorAndroid='rgba(0,0,0,0)'
                             placeholder="Password"
                             secureTextEntry={true}
                             placeholderTextColor="#ffffff"
                             ref="password"
+                            onChangeText={(password) => this.setState({ password })}
                             onSubmitEditing={() => this.refs.repassword.focus()}
 
                         />
@@ -91,8 +137,14 @@ export default class SignUpScreen extends React.Component {
                             secureTextEntry={true}
                             placeholderTextColor="#ffffff"
                             ref="repassword"
+                            onChangeText={(repassword) => this.setState({ repassword })}
 
                         />
+                        {!!this.state.message && (
+                            <Text style={styles.message} >
+                                {this.state.message}
+                            </Text>
+                        )}
                         <TouchableOpacity style={styles.button}
                             onPress={this._submit}>
                             <Text style={styles.buttonText}>Submit</Text>
@@ -108,7 +160,36 @@ export default class SignUpScreen extends React.Component {
         )
     }
     _submit = () => {
-        this.props.navigation.navigate('SignIn');
+        if (this.state.firstname == "") { this.setState({ message: "invalid firstname :(" }) }
+        else if (this.state.lastname == "") { this.setState({ message: "invalid lastname  :(" }) }
+        else if (this.state.userid == "") { this.setState({ message: "invalid Userid  :(" }) }
+        else if (this.state.birthYear == "" || this.state.birthYear >= 2019 || this.state.birthYear <= 0) { this.setState({ message: "invalid birthYear  :(" }) }
+        else if (this.state.birthMonth == "" || this.state.birthMonth >= 13 || this.state.birthMonth <= 0) { this.setState({ message: "invalid birthMonth :(" }) }
+        else if (this.state.birthDay == "" || this.state.birthDay >= 32 || this.state.birthDay <= 0) { this.setState({ message: "invalid birthDay :(" }) }
+        else if (this.state.password == "") { this.setState({ message: "invalid Password :(" }) }
+        else if (this.state.repassword != this.state.password) { this.setState({ message: "Oops! passwords are not matching :(" }) }
+
+
+
+        else this._Submited();
+    }
+    _Submited = () => {
+
+        Alert.alert(
+            "Submitting",
+            "Are you Submitting?",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => {
+                        console.log("Cancel Pressed");
+                    },
+                    style: "cancel"
+                },
+                { text: "subbmit", onPress: () => this.props.navigation.navigate('SignIn') }
+            ],
+            { cancelable: false }
+        );
     };
 
     _signOutAsync = () => {
@@ -155,6 +236,7 @@ const styles = StyleSheet.create({
     },
     inputBoxFirstname: {
         width: 145,
+        height: 45,
         backgroundColor: 'rgba(255, 255,255,0.3)',
         borderRadius: 10,
         paddingHorizontal: 16,
@@ -167,6 +249,7 @@ const styles = StyleSheet.create({
     },
     inputBoxLastname: {
         width: 145,
+        height: 45,
         backgroundColor: 'rgba(255, 255,255,0.3)',
         borderRadius: 10,
         paddingHorizontal: 16,
@@ -180,6 +263,7 @@ const styles = StyleSheet.create({
 
     inputBox: {
         width: 300,
+        height: 45,
         backgroundColor: 'rgba(255, 255,255,0.3)',
         borderRadius: 10,
         paddingHorizontal: 16,
@@ -200,6 +284,42 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         color: '#ffffff',
         textAlign: 'center'
-    }
+    },
+    inputYYYY: {
+        width: 80,
+        height: 45,
+        backgroundColor: 'rgba(255, 255,255,0.3)',
+        borderRadius: 10,
+        paddingHorizontal: 16,
+        fontSize: 16,
+        color: '#ffffff',
+        marginLeft: 10,
+        marginBottom: 4,
+        marginTop: 4,
+    },
+    inputMM: {
+        width: 60,
+        height: 45,
+        backgroundColor: 'rgba(255, 255,255,0.3)',
+        borderRadius: 10,
+        paddingHorizontal: 16,
+        fontSize: 16,
+        color: '#ffffff',
+        marginLeft: 10,
+        marginBottom: 4,
+        marginTop: 4,
+    },
+    inputDD: {
+        width: 60,
+        height: 45,
+        backgroundColor: 'rgba(255, 255,255,0.3)',
+        borderRadius: 10,
+        paddingHorizontal: 16,
+        fontSize: 16,
+        color: '#ffffff',
+        marginLeft: 10,
+        marginBottom: 4,
+        marginTop: 4,
+    },
 });
 

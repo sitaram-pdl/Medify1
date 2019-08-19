@@ -12,19 +12,19 @@ import { createStackNavigator, createSwitchNavigator, createAppContainer } from 
 export default class AuthLoadingScreen extends React.Component {
   constructor() {
     super();
-    this._bootstrapAsync();
+    this.state = { firstlunch: null }
   }
 
-  // Fetch the token from storage then navigate to our appropriate place
-  _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('userToken');
+  componentDidMount() {
+    AsyncStorage.getItem("isLoggedIn").then(value => {
+      if (value === null) {
+        AsyncStorage.setItem("isLoggedIn", 'true').then(() => {
+          this.props.navigation.replace('HomeScreen')
+        })
 
-    // This will switch to the App screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(userToken ? 'HomeScreen' : 'SignIn');
-  };
-
-  // Render any loading content that you like here
+      } else { this.props.navigation.replace('HomeScreen') }
+    })
+  }
   render() {
     return (
       <View style={styles.container}>

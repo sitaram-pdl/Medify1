@@ -57,7 +57,7 @@ export default class SignInScreen extends React.Component {
           <View style={styles.formcontainer}>
             <TextInput style={styles.inputBox}
               underlineColorAndroid='rgba(0,0,0,0)'
-              placeholder="Email / User Id"
+              placeholder="User Id"
               placeholderTextColor="#ffffff"
               selectionColor="#fff"
               keyboardType="email-address"
@@ -102,7 +102,7 @@ export default class SignInScreen extends React.Component {
 
       AsyncStorage.setItem('UserToken', 'sdfadd');
       AsyncStorage.setItem('UserId', 'asdf');
-      AsyncStorage.setItem('UserType', 'Driver');
+      AsyncStorage.setItem('UserType', 'moadar');
 
 
       this.props.navigation.navigate('App');
