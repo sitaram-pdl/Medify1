@@ -1,38 +1,31 @@
-import React from 'react';
-import {
-  ActivityIndicator,
-  AsyncStorage,
-  Button,
-  StatusBar,
-  StyleSheet,
-  View,
-} from 'react-native';
-import { createStackNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation';
+import React, { Component } from 'react';
+import { isSignedIn } from './src/Authentication/Auths';
+import { createRootNavigator } from './src/Authentication/router';
 
-import SignInScreen from './src/pages/SignInScreen';
-import HomeScreen from './src/pages/HomeScreen';
-import AuthLoadingScreen from './src/pages/AuthLoadingScreen';
-import SignUpScreen from './src/pages/SignUpScreen';
+export default class App extends Component {
+  constructor(props) {
+    super(props);
 
-
-
-
-
-
-
-const AppStack = createStackNavigator({ HomeScreen: HomeScreen });
-const AuthStack = createStackNavigator({ SignIn: SignInScreen, SignUp: SignUpScreen });
-
-
-
-export default createAppContainer(createSwitchNavigator(
-  {
-    AuthLoading: AuthLoadingScreen,
-    App: AppStack,
-    Auth: AuthStack,
-  },
-  {
-    initialRouteName: 'AuthLoading',
-
+    this.state = {
+      signedIn: false,
+      checkedSignIn: false,
+    };
   }
-));
+
+  componentDidMount() {
+    isSignedIn()
+      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
+      .catch(err => alert('An error occurred'));
+  }
+
+  render() {
+    const { checkedSignIn, signedIn } = this.state;
+
+    // If we haven't checked AsyncStorage yet, don't render anything (better ways to do this)
+    if (!checkedSignIn) {
+      return null;
+    }
+    const Layout = createRootNavigator(signedIn);
+    return <Layout />;
+  }
+}

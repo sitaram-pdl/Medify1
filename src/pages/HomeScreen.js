@@ -1,14 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, BackHandler, Alert } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { onSignOut } from '../Authentication/Auths';
 
-import Reminder from './tabnav/Reminder';
-import Home from './tabnav/Home';
-import Medication from './tabnav/Medication';
-import Setting from './tabnav/Setting';
+import Reminder from '../tabnavigation/Reminder';
+import Home from '../tabnavigation/Home';
+import Medication from '../tabnavigation/Medication';
+import Setting from '../tabnavigation/Setting';
 
 const HomeStack = createStackNavigator({
   Home: Home,
@@ -89,6 +90,22 @@ export default class HomeScreenPg extends React.Component {
     header: null,
     title: 'Welcome',
   };
+
+  componentDidMount() {
+    this.backHandler = BackHandler.addEventListener("hardwareBackPress", () => {
+      Alert.alert("Logout", "Are you sure you want to logout?", [{ text: "Cancel", onPress: () => { }, style: "cancel" },
+      {
+        text: "Logout",
+        onPress: () => {
+          onSignOut();
+          this.props.navigation.navigate("AuthContain");
+        }
+      }], { cancelable: false });
+      return true;
+    });
+  }
+
+
 
   render() {
     return (

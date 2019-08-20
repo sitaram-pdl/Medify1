@@ -20,6 +20,7 @@ import Logo from '../components/Logo';
 import BgImage from '../images/bg.jpg';
 import { createStackNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation';
 
+import { onSignIn } from '../Authentication/Auths';
 export default class SignInScreen extends React.Component {
 
   state = {
@@ -57,11 +58,11 @@ export default class SignInScreen extends React.Component {
           <View style={styles.formcontainer}>
             <TextInput style={styles.inputBox}
               underlineColorAndroid='rgba(0,0,0,0)'
-              placeholder="User Id"
+              placeholder="Username"
               placeholderTextColor="#ffffff"
               selectionColor="#fff"
               keyboardType="email-address"
-              ref="userid"
+              ref="username"
               onSubmitEditing={() => this.refs.password.focus()}
 
               onChangeText={(username) => this.setState({ username })}
@@ -96,22 +97,26 @@ export default class SignInScreen extends React.Component {
   }
 
   _validate = () => {
-    if (this.state.username == "") { this.setState({ message: "Oops! Registration No. field cannot be empty :(" }) }
-    else if (this.state.password == "") { this.setState({ message: "Oops! Password field cannot be empty :(" }) }
-    else if (this.state.username == "Sitaram" && this.state.password == "password") {
+    //if (this.state.username == "") { this.setState({ message: "Oops! Username. field cannot be empty :(" }) }
+    //else if (this.state.password == "") { this.setState({ message: "Oops! Password field cannot be empty :(" }) }
 
-      AsyncStorage.setItem('UserToken', 'sdfadd');
+    if (this.state.username == "Sita" && this.state.password == "") {
+
+
+      AsyncStorage.setItem('Sitaram', 'Sitaram');
       AsyncStorage.setItem('UserId', 'asdf');
       AsyncStorage.setItem('UserType', 'moadar');
 
-
-      this.props.navigation.navigate('App');
+      onSignIn(this.state.username)
+      this.props.navigation.navigate('AppContain');
     }
-    else this._userLogin()
+
+    else { this._userLogin() }
   };
 
 
   _userLogin() {
+
     { this.setState({ message: "thik se dal bey madarchut" }) }
 
     //hya gara haii sahil
