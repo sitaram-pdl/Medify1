@@ -10,24 +10,9 @@ export default class Home extends React.Component {
 
 
   static navigationOptions = {
-    headerTitle: (<View style={{ flex: 1, alignItems: "center" }}>
-      <Image source={require('../images/logo1.png')} style={{ height: 75, width: 210 }} /></View>
-    ),
+    header: null,
 
-    headerTitleStyle: {
-
-      flexGrow: 1,
-
-    },
-    headerTintColor: 'white',
-    headerStyle: {
-
-      backgroundColor: '#00806b',
-
-    },
-
-
-  }
+  };
 
 
 

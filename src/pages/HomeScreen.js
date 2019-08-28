@@ -1,15 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View, BackHandler, Alert } from 'react-native';
+import { StyleSheet, Text, View, BackHandler, Alert, Image } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import IconFontAwesome from 'react-native-vector-icons/FontAwesome5';
 import { onSignOut } from '../Authentication/Auths';
+import { Icon } from "react-native-elements";
 
 import Reminder from '../tabnavigation/Reminder';
 import Home from '../tabnavigation/Home';
 import Medication from '../tabnavigation/Medication';
-import Setting from '../tabnavigation/Setting';
+import MapBar from '../tabnavigation/Map';
 
 const HomeStack = createStackNavigator({
   Home: Home,
@@ -20,11 +21,12 @@ HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarIcon: ({ tintColor }) => (
     <View>
-      <Icon style={[{ color: tintColor }]} size={22} name={'home'} />
+      <IconFontAwesome style={[{ color: tintColor }]} size={22} name={'home'} />
     </View>),
   activeColor: 'white',
   inactiveColor: '#b2dfdb',
   barStyle: { backgroundColor: '#00806b' },
+
 
 };
 
@@ -36,7 +38,7 @@ ReminderStack.navigationOptions = {
   tabBarLabel: 'Reminder',
   tabBarIcon: ({ tintColor }) => (
     <View>
-      <Icon style={[{ color: tintColor }]} size={21} name={'user-clock'} />
+      <IconFontAwesome style={[{ color: tintColor }]} size={21} name={'user-clock'} />
     </View>),
 
   activeColor: 'white',
@@ -53,7 +55,7 @@ MedicationStack.navigationOptions = {
   tabBarLabel: 'Medication',
   tabBarIcon: ({ tintColor }) => (
     <View>
-      <Icon style={[{ color: tintColor }]} size={22} name={'notes-medical'} />
+      <IconFontAwesome style={[{ color: tintColor }]} size={22} name={'notes-medical'} />
     </View>),
   activeColor: 'white',
   inactiveColor: '#b2dfdb',
@@ -61,15 +63,15 @@ MedicationStack.navigationOptions = {
 
 };
 
-const SettingStack = createStackNavigator({
-  Setting: Setting,
+const MapStack = createStackNavigator({
+  Map: MapBar,
 });
 
-SettingStack.navigationOptions = {
-  tabBarLabel: 'Setting',
+MapStack.navigationOptions = {
+  tabBarLabel: 'Map',
   tabBarIcon: ({ tintColor }) => (
     <View>
-      <Icon style={[{ color: tintColor }]} size={22} name={'ellipsis-h'} />
+      <IconFontAwesome style={[{ color: tintColor }]} size={22} name={'map-marker-alt'} />
     </View>),
   activeColor: 'white',
   inactiveColor: '#b2dfdb',
@@ -81,15 +83,50 @@ const Tabnavigation = createMaterialBottomTabNavigator({
   HomeStack,
   MedicationStack,
   ReminderStack,
-  SettingStack
+  MapStack
 })
 
 const Appcontain = createAppContainer(Tabnavigation)
 export default class HomeScreenPg extends React.Component {
   static navigationOptions = {
-    header: null,
-    title: 'Welcome',
-  };
+    headerTitle: (<View style={{ flex: 1, alignItems: "center" }}>
+      <Image source={require('../images/logo1.png')} style={{ height: 75, width: 210 }} /></View>
+    ),
+
+    headerTitleStyle: {
+
+      flexGrow: 1,
+
+    },
+    headerTintColor: 'white',
+    headerStyle: {
+
+      backgroundColor: '#00806b',
+    },
+    headerLeft: (<View style={{
+      flexDirection: "row",
+      justifyContent: "space-evenly",
+      width: 50
+    }}>
+      <Icon color='white'
+
+        type="ionicon"
+        name={Platform.OS === "ios" ? "ios-menu" : "md-menu"}
+      />
+    </View>
+    ),
+    headerRight: (
+      <View style={{
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        width: 50
+      }}>
+        <Icon color='white' type="ionicon" name={Platform.OS === "ios" ? "ios-more" : "md-more"} />
+      </View>
+    )
+
+
+  }
 
   componentDidMount() {
     this.backHandler = BackHandler.addEventListener("hardwareBackPress", () => {
@@ -113,4 +150,6 @@ export default class HomeScreenPg extends React.Component {
     );
   }
 }
+
+
 

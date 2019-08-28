@@ -24,12 +24,9 @@ export default class SignUpScreen extends React.Component {
     }
 
     state = {
-        firstname: '',
-        lastname: '',
+
         userid: '',
-        birthYear: '',
-        birthMonth: '',
-        birthDay: '',
+
         password: '',
         repassword: '',
         message: '',
@@ -50,28 +47,6 @@ export default class SignUpScreen extends React.Component {
                 <ImageBackground source={BgImage} style={{ width: '100%', height: '100%' }} >
                     <Logo />
                     <View style={styles.formcontainer}>
-                        <View style={styles.firstAndLastName}>
-                            <TextInput style={styles.inputBoxFirstname}
-                                underlineColorAndroid='rgba(0,0,0,0)'
-                                placeholder="Firstname"
-                                placeholderTextColor="#ffffff"
-                                ref="firstname"
-                                onChangeText={(firstname) => this.setState({ firstname })}
-                                onSubmitEditing={() => this.refs.lastname.focus()}
-
-
-                            />
-
-                            <TextInput style={styles.inputBoxLastname}
-                                underlineColorAndroid='rgba(0,0,0,0)'
-                                placeholder="Lastname"
-                                placeholderTextColor="#ffffff"
-                                ref="lastname"
-                                onChangeText={(lastname) => this.setState({ lastname })}
-                                onSubmitEditing={() => this.refs.userid.focus()}
-
-                            />
-                        </View>
 
                         <TextInput style={styles.inputBox}
                             underlineColorAndroid='rgba(0,0,0,0)'
@@ -80,47 +55,12 @@ export default class SignUpScreen extends React.Component {
                             keyboardType="email-address"
                             ref="userid"
                             onChangeText={(userid) => this.setState({ userid })}
-                            onSubmitEditing={() => this.refs.yyyy.focus()}
+                            onSubmitEditing={() => this.refs.password.focus()}
 
                         />
 
-                        <View style={styles.firstAndLastName}>
-                            <Text style={styles.signupButton}>D.O.B</Text>
-                            <TextInput style={styles.inputYYYY}
-                                underlineColorAndroid='rgba(0,0,0,0)'
-                                placeholder="YYYY"
-                                placeholderTextColor="#ffffff"
-                                keyboardType="numeric"
-                                ref="yyyy"
-                                maxLength={4}
-                                onChangeText={(birthYear) => this.setState({ birthYear })}
-                                onSubmitEditing={() => this.refs.mm.focus()}
-                            />
-                            <TextInput style={styles.inputMM}
-                                underlineColorAndroid='rgba(0,0,0,0)'
-                                placeholder="MM"
-                                keyboardType="numeric"
-                                placeholderTextColor="#ffffff"
-                                ref="mm"
-                                onChangeText={(birthMonth) => this.setState({ birthMonth })}
-                                onSubmitEditing={() => this.refs.dd.focus()}
-                                maxLength={2}
-                            />
 
 
-
-                            <TextInput style={styles.inputMM}
-                                underlineColorAndroid='rgba(0,0,0,0)'
-                                placeholder="DD"
-                                keyboardType="numeric"
-                                placeholderTextColor="#ffffff"
-                                ref="dd"
-                                maxLength={2}
-                                onChangeText={(birthDay) => this.setState({ birthDay })}
-                                onSubmitEditing={() => this.refs.password.focus()}
-
-                            />
-                        </View>
                         <TextInput style={styles.inputBox}
                             underlineColorAndroid='rgba(0,0,0,0)'
                             placeholder="Password"

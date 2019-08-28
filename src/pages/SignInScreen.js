@@ -173,9 +173,10 @@ const styles = StyleSheet.create({
   inputBox: {
     width: 300,
     backgroundColor: 'rgba(255, 255,255,0.3)',
-    borderRadius: 10,
+
     paddingHorizontal: 16,
     fontSize: 16,
+    borderRadius: 10,
     color: '#ffffff',
     marginVertical: 10
   },

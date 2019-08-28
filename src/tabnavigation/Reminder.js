@@ -3,19 +3,8 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 
 export default class Reminder extends React.Component {
     static navigationOptions = {
-        title: 'Reminder',
-        headerTitleStyle: {
+        header: null,
 
-            flexGrow: 1,
-            textAlign: 'center',
-            alignSelf: "center"
-        },
-        headerTintColor: 'white',
-        headerStyle: {
-
-
-            backgroundColor: '#00806b',
-        },
     };
     render() {
         return (
