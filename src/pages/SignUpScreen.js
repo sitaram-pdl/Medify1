@@ -70,6 +70,7 @@ export default class SignUpScreen extends React.Component {
                             onChangeText={(password) => this.setState({ password })}
                             onSubmitEditing={() => this.refs.repassword.focus()}
 
+
                         />
                         <TextInput style={styles.inputBox}
                             underlineColorAndroid='rgba(0,0,0,0)'
@@ -100,12 +101,7 @@ export default class SignUpScreen extends React.Component {
         )
     }
     _submit = () => {
-        if (this.state.firstname == "") { this.setState({ message: "invalid firstname :(" }) }
-        else if (this.state.lastname == "") { this.setState({ message: "invalid lastname  :(" }) }
-        else if (this.state.userid == "") { this.setState({ message: "invalid Userid  :(" }) }
-        else if (this.state.birthYear == "" || this.state.birthYear >= 2019 || this.state.birthYear <= 0) { this.setState({ message: "invalid birthYear  :(" }) }
-        else if (this.state.birthMonth == "" || this.state.birthMonth >= 13 || this.state.birthMonth <= 0) { this.setState({ message: "invalid birthMonth :(" }) }
-        else if (this.state.birthDay == "" || this.state.birthDay >= 32 || this.state.birthDay <= 0) { this.setState({ message: "invalid birthDay :(" }) }
+        if (this.state.userid == "") { this.setState({ message: "invalid Userid  :(" }) }
         else if (this.state.password == "") { this.setState({ message: "invalid Password :(" }) }
         else if (this.state.repassword != this.state.password) { this.setState({ message: "Oops! passwords are not matching :(" }) }
 

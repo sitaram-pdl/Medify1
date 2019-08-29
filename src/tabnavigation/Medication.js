@@ -36,7 +36,6 @@ export default class Medication extends React.Component {
                             fontSize: 16,
                             borderRadius: 5,
                             color: '#00806b',
-
                             marginLeft: 10,
                             marginRight: 10,
                             marginTop: 30
@@ -45,27 +44,24 @@ export default class Medication extends React.Component {
                         placeholder="Enter Your name of medification"
                         underlineColorAndroid="transparent"
                         ref="medificationName"
-                        onSubmitEditing={() => this.refs.doses.focus()}
+                        onSubmitEditing={() => this.refs.mtype.focus()}
                     />
+
                     <Dropdown
                         label='Medicine type'
                         data={data}
-
-
                         containerStyle={{
 
-                            flexGrow: 1,
-                            height: 20, width: "95%",
-
+                            width: 320,
                             width: 300,
                             marginBottom: 40,
                             fontSize: 16,
                             borderRadius: 5,
                             color: '#00806b',
-
-
                         }}
                     />
+
+
                     <TextInput
                         style={{
                             flexGrow: 1,
@@ -76,16 +72,15 @@ export default class Medication extends React.Component {
                             fontSize: 16,
                             borderRadius: 5,
                             color: '#00806b',
-
                             marginLeft: 10,
                             marginRight: 10,
-                            marginTop: 30
+                            marginTop: 5
                         }}
                         placeholder="Dosage"
                         keyboardType='numeric'
                         underlineColorAndroid="transparent"
                         ref="doses"
-                        onSubmitEditing={() => this.refs.quantity.focus()}
+                        onSubmitEditing={() => this.refs.quality.focus()}
                     />
                     <TextInput
                         style={{
@@ -97,7 +92,6 @@ export default class Medication extends React.Component {
                             fontSize: 16,
                             borderRadius: 5,
                             color: '#00806b',
-
                             marginLeft: 10,
                             marginRight: 10,
                             marginTop: 30
@@ -105,7 +99,7 @@ export default class Medication extends React.Component {
                         placeholder="Quantity"
                         keyboardType='numeric'
                         underlineColorAndroid="transparent"
-                        ref="doses"
+                        ref="quality"
                         onSubmitEditing={() => this.refs.medificationNote.focus()}
                     />
                     <TextInput
@@ -118,7 +112,6 @@ export default class Medication extends React.Component {
                             fontSize: 16,
                             borderRadius: 5,
                             color: '#00806b',
-
                             marginLeft: 10,
                             marginRight: 10,
                             marginTop: 30
