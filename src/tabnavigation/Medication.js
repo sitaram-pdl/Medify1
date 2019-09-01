@@ -10,6 +10,15 @@ export default class Medication extends React.Component {
         header: null,
 
     };
+    state = {
+
+        nameOfMedication: '',
+        medificationNote: '',
+        medicationType: '',
+        doses: '',
+        quality: '',
+    };
+
     render() {
         let data = [{
             value: 'Pills',
@@ -44,12 +53,14 @@ export default class Medication extends React.Component {
                         placeholder="Enter Your name of medification"
                         underlineColorAndroid="transparent"
                         ref="medificationName"
+                        onChangeText={(nameOfMedication) => this.setState({ nameOfMedication })}
                         onSubmitEditing={() => this.refs.mtype.focus()}
                     />
 
                     <Dropdown
                         label='Medicine type'
                         data={data}
+
                         containerStyle={{
 
                             width: 320,
@@ -59,6 +70,9 @@ export default class Medication extends React.Component {
                             borderRadius: 5,
                             color: '#00806b',
                         }}
+                        ref='mtype'
+                        onSubmitEditing={() => this.refs.doses.focus()}
+                        onChangeText={(medicationType) => this.setState({ medicationType })}
                     />
 
 
@@ -81,6 +95,7 @@ export default class Medication extends React.Component {
                         underlineColorAndroid="transparent"
                         ref="doses"
                         onSubmitEditing={() => this.refs.quality.focus()}
+                        onChangeText={(doses) => this.setState({ doses })}
                     />
                     <TextInput
                         style={{
@@ -101,6 +116,7 @@ export default class Medication extends React.Component {
                         underlineColorAndroid="transparent"
                         ref="quality"
                         onSubmitEditing={() => this.refs.medificationNote.focus()}
+                        onChangeText={(quality) => this.setState({ quality })}
                     />
                     <TextInput
                         style={{
@@ -121,6 +137,7 @@ export default class Medication extends React.Component {
                         placeholder="Medification note"
                         underlineColorAndroid="transparent"
                         ref="medificationNote"
+                        onChangeText={(medificationNote) => this.setState({ medificationNote })}
 
                     />
                     <View style={styles.signupTextCont}>
