@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, BackHandler, Alert, Image } from 'react-native';
+import { StyleSheet, Text, View, BackHandler, Alert, Image, TouchableOpacity } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
-
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome5';
 import { onSignOut } from '../Authentication/Auths';
 import { Icon } from "react-native-elements";
+import CustomMenuIcon from '../components/CustomMenuIcon';
 
 import Reminder from '../tabnavigation/Reminder';
 import Home from '../tabnavigation/Home';
@@ -88,59 +88,66 @@ const Tabnavigation = createMaterialBottomTabNavigator({
 
 const Appcontain = createAppContainer(Tabnavigation)
 export default class HomeScreenPg extends React.Component {
-  static navigationOptions = {
-    headerTitle: (<View style={{ flex: 1, alignItems: "center" }}>
-      <Image source={require('../images/logo1.png')} style={{ height: 75, width: 210 }} /></View>
-    ),
-
-    headerTitleStyle: {
-
-      flexGrow: 1,
-
-    },
-    headerTintColor: 'white',
-    headerStyle: {
-
-      backgroundColor: '#00806b',
-    },
-    headerLeft: (<View style={{
-      flexDirection: "row",
-      justifyContent: "space-evenly",
-      width: 50
-    }}>
-      <Icon color='white'
-
-        type="ionicon"
-        name={Platform.OS === "ios" ? "ios-menu" : "md-menu"}
-      />
-    </View>
-    ),
-    headerRight: (
-      <View style={{
-        flexDirection: "row",
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: (<View style={{
+        flex: 1, alignItems: "center", flexDirection: "row",
         justifyContent: "space-evenly",
-        width: 50
       }}>
-        <Icon color='white' type="ionicon" name={Platform.OS === "ios" ? "ios-more" : "md-more"} />
-      </View>
-    )
+        <Text>    </Text>
+        <Text>    </Text>
+        <Image source={require('../images/logo1.png')} style={{ height: 75, width: 210 }} /></View>
+      ),
 
+      headerTitleStyle: {
 
+        flexGrow: 1,
+
+      },
+      headerTintColor: 'white',
+      headerStyle: {
+
+        backgroundColor: '#00806b',
+      },
+      headerRight: (
+        //Custom menu component
+
+        <CustomMenuIcon
+          //Menu Text
+          menutext="Menu"
+          //Menu View Style
+          menustyle={{
+            marginRight: 25,
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+          }}
+          //Menu Text Style
+          textStyle={{
+            color: 'white',
+          }}
+          //Click functions for the menu items
+          option1Click={() => {
+            alert('about us to be made');
+          }}
+          option2Click={() => {
+            Alert.alert("Logout", "Are you sure you want to logout?", [{ text: "Cancel", onPress: () => { }, style: "cancel" },
+            {
+              text: "Logout",
+              onPress: () => {
+                onSignOut();
+                navigation.navigate("AuthContain");
+              }
+            }], { cancelable: false });
+            return true;
+          }}
+
+        />
+      ),
+
+    }
   }
 
-  componentDidMount() {
-    this.backHandler = BackHandler.addEventListener("hardwareBackPress", () => {
-      Alert.alert("Logout", "Are you sure you want to logout?", [{ text: "Cancel", onPress: () => { }, style: "cancel" },
-      {
-        text: "Logout",
-        onPress: () => {
-          onSignOut();
-          this.props.navigation.navigate("AuthContain");
-        }
-      }], { cancelable: false });
-      return true;
-    });
-  }
+
 
 
 

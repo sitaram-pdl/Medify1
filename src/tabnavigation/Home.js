@@ -21,7 +21,7 @@ export default class Home extends React.Component {
 
       <View style={styles.container}>
 
-        <Button title="Logout" style={width = 300} />
+
 
         <Text>Press back button</Text>
         <Text>Home Screen</Text>
