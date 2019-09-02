@@ -13,7 +13,6 @@ export const AuthStack = createStackNavigator({ SignIn: SignInScreen, SignUp: Si
 
 
 
-
 export const createRootNavigator = (signedIn = false) => {
     return createAppContainer(new createSwitchNavigator(
         {

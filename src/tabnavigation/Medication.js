@@ -150,6 +150,9 @@ export default class Medication extends React.Component {
 
         );
     }
+    add = () => {
+        this.props.navigation.navigate('MedificationSub');
+    }
 
 }
 

@@ -8,8 +8,10 @@ import { Icon } from "react-native-elements";
 import CustomMenuIcon from '../components/CustomMenuIcon';
 
 import Reminder from '../tabnavigation/Reminder';
+import ReminderSub from '../tabnavigation/ReminderSub';
 import Home from '../tabnavigation/Home';
 import Medication from '../tabnavigation/Medication';
+import MedicationSub from '../tabnavigation/MedificationSub';
 import MapBar from '../tabnavigation/Map';
 
 const HomeStack = createStackNavigator({
@@ -30,9 +32,16 @@ HomeStack.navigationOptions = {
 
 };
 
-const ReminderStack = createStackNavigator({
-  Reminder: Reminder,
-});
+const ReminderStack = createStackNavigator(
+  {
+    ReminderSub: ReminderSub,
+    Reminder: Reminder,
+  }, {}
+
+  , {
+    initialRouteName: ReminderSub
+  }
+);
 
 ReminderStack.navigationOptions = {
   tabBarLabel: 'Reminder',
@@ -48,8 +57,10 @@ ReminderStack.navigationOptions = {
 };
 
 const MedicationStack = createStackNavigator({
-  Medication: Medication,
-});
+  MedicationSub: MedicationSub,
+  Medication: Medication
+}, {}, { initialRouteName: MedicationSub }
+);
 
 MedicationStack.navigationOptions = {
   tabBarLabel: 'Medication',
@@ -79,7 +90,7 @@ MapStack.navigationOptions = {
 
 };
 
-const Tabnavigation = createMaterialBottomTabNavigator({
+export const Tabnavigation = createMaterialBottomTabNavigator({
   HomeStack,
   MedicationStack,
   ReminderStack,
@@ -157,6 +168,4 @@ export default class HomeScreenPg extends React.Component {
     );
   }
 }
-
-
 
