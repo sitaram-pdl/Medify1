@@ -9,7 +9,13 @@ export default class Medication extends React.Component {
     static navigationOptions = {
         header: null,
 
+
     };
+
+
+    add = () => {
+        this.props.navigation.goBack()
+    }
     state = {
 
         nameOfMedication: '',
@@ -31,6 +37,7 @@ export default class Medication extends React.Component {
             value: 'Capsule'
         }
         ];
+
         return (
 
             <ScrollView>
@@ -150,9 +157,7 @@ export default class Medication extends React.Component {
 
         );
     }
-    add = () => {
-        this.props.navigation.navigate('MedificationSub');
-    }
+
 
 }
 

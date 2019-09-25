@@ -6,7 +6,6 @@ import IconFontAwesome from 'react-native-vector-icons/FontAwesome5';
 import { onSignOut } from '../Authentication/Auths';
 import { Icon } from "react-native-elements";
 import CustomMenuIcon from '../components/CustomMenuIcon';
-
 import Reminder from '../tabnavigation/Reminder';
 import ReminderSub from '../tabnavigation/ReminderSub';
 import Home from '../tabnavigation/Home';
