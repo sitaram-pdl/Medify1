@@ -10,6 +10,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 
 import SwipeCards from 'react-native-swipe-cards';
 
+
 class Card extends React.Component {
   constructor(props) {
     super(props);
@@ -105,6 +106,7 @@ export default class Home extends React.Component {
     // If you want a stack of cards instead of one-per-one view, activate stack mode
     // stack={true}
     return (
+
       <SwipeCards
         cards={this.state.cards}
         renderCard={(cardData) => <Card {...cardData} />}
@@ -115,6 +117,7 @@ export default class Home extends React.Component {
         handleMaybe={this.handleMaybe}
         hasMaybeAction
       />
+
     )
   }
 }

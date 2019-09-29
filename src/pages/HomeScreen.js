@@ -97,7 +97,13 @@ export const Tabnavigation = createMaterialBottomTabNavigator({
 })
 
 const Appcontain = createAppContainer(Tabnavigation)
+
 export default class HomeScreenPg extends React.Component {
+  state = {
+    visibleModal: null,
+  };
+
+
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: (<View style={{
@@ -122,6 +128,7 @@ export default class HomeScreenPg extends React.Component {
       headerRight: (
         //Custom menu component
 
+
         <CustomMenuIcon
           //Menu Text
           menutext="Menu"
@@ -136,9 +143,7 @@ export default class HomeScreenPg extends React.Component {
             color: 'white',
           }}
           //Click functions for the menu items
-          option1Click={() => {
-            alert('about us to be made');
-          }}
+
           option2Click={() => {
             Alert.alert("Logout", "Are you sure you want to logout?", [{ text: "Cancel", onPress: () => { }, style: "cancel" },
             {
@@ -160,10 +165,12 @@ export default class HomeScreenPg extends React.Component {
 
 
 
-
   render() {
     return (
+
+
       <Appcontain />
+
     );
   }
 }

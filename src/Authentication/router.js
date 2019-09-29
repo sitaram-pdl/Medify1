@@ -8,7 +8,8 @@ import SignInScreen from '../pages/SignInScreen';
 import HomeScreen from '../pages/HomeScreen';
 import SignUpScreen from '../pages/SignUpScreen';
 
-export const AppStack = createStackNavigator({ HomeScreen: HomeScreen });
+
+export const AppStack = createStackNavigator({ HomeScreen: HomeScreen, });
 export const AuthStack = createStackNavigator({ SignIn: SignInScreen, SignUp: SignUpScreen });
 
 
