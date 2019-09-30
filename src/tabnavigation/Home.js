@@ -1,6 +1,11 @@
 //npm install --save react-native-swipe-cards 
-//mathiko code install garna lie ho hai
+
 // use strict nafala haii ani
+
+//npm install native-base --save
+//npm i react-native-modal
+//react-native link
+// CustomMenuIcon ra home pahe copy gara ani hai !!!
 
 
 'use strict';
