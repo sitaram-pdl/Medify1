@@ -1,6 +1,8 @@
 //This is an example code for the popup menu//
 //npm install native-base --save
 //npm i react-native-modal
+//react-native link
+// CustomMenuIcon ra home pahe copy gara ani hai !!!
 import React, { Component } from 'react';
 //import react in our code.
 import { View, Image, TouchableOpacity, Platform, StyleSheet, Button, TouchableHighlight, Alert } from 'react-native';
