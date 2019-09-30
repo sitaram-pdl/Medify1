@@ -1,12 +1,14 @@
 //This is an example code for the popup menu//
+//npm install native-base --save
+//npm i react-native-modal
 import React, { Component } from 'react';
 //import react in our code.
-import { View, Text, Image, TouchableOpacity, Platform, StyleSheet, Button, TouchableHighlight, Alert } from 'react-native';
+import { View, Image, TouchableOpacity, Platform, StyleSheet, Button, TouchableHighlight, Alert } from 'react-native';
 //import all the components we are going to use.
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 //import menu and menu item
-import { Icon } from "react-native-elements";
-
+import { Icon, } from "react-native-elements";
+import { Container, Header, Content, Card, CardItem, Text, Body } from 'native-base';
 import Modal from "react-native-modal";
 
 export default class CustomMenuIcon extends Component {
@@ -46,8 +48,10 @@ export default class CustomMenuIcon extends Component {
                 <Menu
                     ref={this.setMenuRef}
                     button={
-                        <TouchableOpacity onPress={this.showMenu}>
-
+                        <TouchableOpacity
+                            style={{ flexDirection: 'row' }}
+                            onPress={this.showMenu}>
+                            <Text>  </Text>
                             <Icon color='white' type="ionicon" style={{ width: 30, height: 30 }} name={Platform.OS === "ios" ? "ios-more" : "md-more"} />
 
                         </TouchableOpacity>
@@ -60,6 +64,7 @@ export default class CustomMenuIcon extends Component {
 
                 </Menu>
                 <Modal
+
                     animationType={"slide"}
                     animationInTiming={50000}
                     onBackdropPress={() => this.setState({ modalVisible: false })}
@@ -70,20 +75,34 @@ export default class CustomMenuIcon extends Component {
                     visible={this.state.modalVisible}
                 >
                     <View style={styles.modal}>
-                        <Text style={styles.text}>Modal is open!</Text>
-                        <View>
-                            <Text>Hello World!</Text>
 
-                            <TouchableHighlight
-                                onPress={() => {
-                                    this.setModalVisible(!this.state.modalVisible);
-                                }}>
-                                <Text>Hide Modal</Text>
-                            </TouchableHighlight>
-                        </View>
+                        <Card style={{
+                            flex: 1,
+                            height: '98%', width: '98%',
+                            borderRadius: 15,
+                            borderWidth: 1,
+                        }}>
+                            <CardItem header bordered>
+                                <Text>About US</Text>
+                            </CardItem>
+                            <CardItem bordered>
+                                <Body>
+                                    <Text>
+                                        medify team
+                </Text>
+                                </Body>
+                            </CardItem>
+
+                        </Card>
+
+
+
+
+
                     </View>
+
                 </Modal>
-            </View>
+            </View >
         );
     }
 }
@@ -91,9 +110,10 @@ export default class CustomMenuIcon extends Component {
 const styles = StyleSheet.create({
 
     modal: {
+
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: "#00BCD4",
+        backgroundColor: "#00806b",
         height: '90%',
         width: '95%',
         borderRadius: 10,
