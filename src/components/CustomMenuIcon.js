@@ -1,4 +1,5 @@
-//This is an example code for the popup menu//
+//npm install --save react-native-swipe-cards 
+// use strict nafala haii ani
 //npm install native-base --save
 //npm i react-native-modal
 //react-native link
